@@ -1,10 +1,13 @@
-class TodoItem
+require_relative 'Item'
+
+class TodoItem < Item
   include Listable
   attr_reader :description, :due, :priority
 
-  def initialize(description, options={})
+  def initialize(type, description, options={})
+    super(type: type)
     @description = description
-    @due = options[:due] ? Date.parse(options[:due]) : options[:due]
+    @due = options[:due] ? Chronic.parse(options[:due]) : options[:due]
     @priority = options[:priority]
   end
 

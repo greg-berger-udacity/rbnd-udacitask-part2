@@ -1,11 +1,15 @@
-class EventItem
+require 'chronic'
+require_relative 'Item'
+
+class EventItem < Item
   include Listable
   attr_reader :description, :start_date, :end_date
 
-  def initialize(description, options={})
+  def initialize(type, description, options={})
+    super(type: type)
     @description = description
-    @start_date = Date.parse(options[:start_date]) if options[:start_date]
-    @end_date = Date.parse(options[:end_date]) if options[:end_date]
+    @start_date = Chronic.parse(options[:start_date]) if options[:start_date]
+    @end_date = Chronic.parse(options[:end_date]) if options[:end_date]
   end
   
   def details

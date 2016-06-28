@@ -1,3 +1,5 @@
+require 'colorize'
+
 module Listable
   
   def format_description(description)
@@ -5,11 +7,10 @@ module Listable
   end
   
   def format_priority(priority)
-    value = " ⇧" if priority == "high"
-    value = " ⇨" if priority == "medium"
-    value = " ⇩" if priority == "low"
-    value = "" if !priority
-    return value
+    value = " ⇧".colorize(:green) if priority == "high"
+    value = " ⇨".colorize(:yellow) if priority == "medium"
+    value = " ⇩".colorize(:red) if priority == "low"
+    return (value != nil)? value : ""
   end
 
   def format_date(d0, d1)
