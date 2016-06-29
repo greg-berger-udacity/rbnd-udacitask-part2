@@ -18,14 +18,7 @@ class UdaciList
     default_types.each { |key, value| register_new_type(key, value) }
   end
 
-  # There must be a cleaner way to do this with Ruby... Y/N??
   def add(type, description, options={})
-
-    # Check Priority Value
-    priorities = ['low', 'medium', 'high']
-    if options[:priority] != nil && !priorities.include?(options[:priority])
-      raise UdaciListErrors::InvalidPriorityValue
-    end
 
     # Check Type
     type = type.downcase
