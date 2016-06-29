@@ -8,7 +8,8 @@ class TodoItem < Item
     super(type: "todo")
     @description = description
     @due = options[:due] ? Chronic.parse(options[:due]) : options[:due]
-    @priority = options[:priority]
+    # Check Priority Value
+    set_priority options[:priority]
   end
 
   def details
@@ -16,4 +17,14 @@ class TodoItem < Item
     format_date(@due, nil) +
     format_priority(@priority)
   end
+
+  def set_priority(p)
+    priorities = ['low', 'medium', 'high']
+    if p != nil && !priorities.include?(p)
+      raise UdaciListErrors::InvalidPriorityValue
+    end
+    @priority = p
+  end
+    
+
 end

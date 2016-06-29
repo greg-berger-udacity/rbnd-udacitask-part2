@@ -22,7 +22,7 @@ list.all
 new_list = UdaciList.new # Should create a list called "Untitled List"
 new_list.add("todo", "Buy more dog food", due: "in 5 weeks", priority: "medium")
 new_list.add("todo", "Go dancing", due: "in 2 hours")
-new_list.add("todo", "Buy groceries", priority: "high")
+priority_test_item = new_list.add("todo", "Buy groceries", priority: "high")
 new_list.add("event", "Birthday Party", start_date: "May 31")
 new_list.add("event", "Vacation", start_date: "Dec 20", end_date: "Dec 30")
 new_list.add("event", "Life happens")
@@ -52,3 +52,12 @@ new_list.filter("event")
 new_list.register_new_type("image", "ImageItem")
 new_list.add("image", "This is an image")
 new_list.filter("image")
+
+# DEMO Priority change
+# ------------------------
+puts priority_test_item.priority
+#priority_test_item.set_priority "super duper low"
+# Throws a InvalidPriority error
+priority_test_item.set_priority "low"
+puts priority_test_item.priority
+

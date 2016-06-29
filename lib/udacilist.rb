@@ -32,6 +32,7 @@ class UdaciList
     
     if @types.has_key?(type)
       @items.push Object.const_get(@types[type]).new(description, options)
+      return @items.last
     else
       raise UdaciListErrors::InvalidItemType
     end

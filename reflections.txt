@@ -1,13 +1,18 @@
 # What you added to Udacitask 2.0
 # -------------------------------------------------------
 1. What is the gem of your choice and how did you use it?
+  - I used Formatador to format the table when all and filter are called.
 2. Describe the 2 features you added to the project.
-  a) Feature 1...
-  b) Feature 2...
+  a) Allows developers to add new item types easily. Simply add a file with a class that inherits from Item, then call list.register_new_type(file_name, class_name)
+  b) Allows users to change priority value, and of course, I take "garbage in - garbage out" into account.
 
 # REFLECTIONS
 # -------------------------------------------------------
 1. How long did you spend working on this project?
+  - I spent probably 6 hours
 2. What was the most rewarding challenge you conquered?
+  - The most rewarding part was getting the feature a.) New Types working.
 3. What two additional features did you build? Why?
+  - I decided to allow developers to add their owns files and register them as child classes of Item because it seemed interesting. Alternatively, I could put all Items as one class called Item, then I can dynamically add new types without a developer having to add files. 
 4. Where do you still have room to grow?
+  - I sometimes juggling too many things at a time, and tend to forget about little details, which leads to me spending a decent amount of time on bugs. 
