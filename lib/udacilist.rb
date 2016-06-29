@@ -1,5 +1,6 @@
 # lib/udacitask.rb
 
+require 'formatador'
 require_relative 'errors'
 
 class UdaciList
@@ -49,11 +50,19 @@ class UdaciList
     print @title
     puts (type != nil)? " - " + type : ""
     puts "-" * @title.length
-    @items.each_with_index do |item, position|
-      if item.type == type || all
-        puts "#{position + 1}) #{item.details}"
-      end
-    end
+
+    data = @items.select{|i| i.type == type || all}
+                  .map.with_index { |item, i| 
+                      {
+                        "" => i, 
+                        "Description" => item.description, 
+                        "Details" => item.details, 
+                        "Type" => item.type
+                      } 
+                  }
+
+    Formatador.display_table(data)
+
   end
 
 end
