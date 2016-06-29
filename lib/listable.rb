@@ -13,10 +13,10 @@ module Listable
     return (value != nil)? value : ""
   end
 
-  def format_date(d0, d1)
-    dates = (d0)? d0.strftime("%D") : ""
-    dates += (d0 && d1)? " -- " : ""
-    dates += (d1)? d0.strftime("%D") : ""
+  def format_date(start_date, end_date)
+    dates = (start_date)? start_date.strftime("%D") : ""
+    dates += (start_date && end_date)? " -- " : ""
+    dates += (end_date)? start_date.strftime("%D") : ""
     return dates
   end
 

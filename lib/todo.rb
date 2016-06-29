@@ -18,12 +18,12 @@ class TodoItem < Item
     format_priority(@priority)
   end
 
-  def set_priority(p)
+  def set_priority(priority)
     priorities = ['low', 'medium', 'high']
-    if p != nil && !priorities.include?(p)
+    if !priorities.include?(priority) && priority != nil
       raise UdaciListErrors::InvalidPriorityValue
     end
-    @priority = p
+    @priority = priority
   end
     
 
