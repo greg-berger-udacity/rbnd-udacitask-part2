@@ -4,8 +4,8 @@ class TodoItem < Item
   include Listable
   attr_reader :description, :due, :priority
 
-  def initialize(type, description, options={})
-    super(type: type)
+  def initialize(description, options={})
+    super(type: "todo")
     @description = description
     @due = options[:due] ? Chronic.parse(options[:due]) : options[:due]
     @priority = options[:priority]

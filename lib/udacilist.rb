@@ -9,6 +9,13 @@ class UdaciList
   def initialize(options={})
     @title = (options[:title] != nil) ? options[:title] : "Untitled List"
     @items = []
+    default_types = {
+      "todo" => "TodoItem",
+      "event" => "EventItem",
+      "link" => "LinkItem"
+    }
+    @types = Hash.new
+    default_types.each { |key, value| register_new_type(key, value) }
   end
 
   # There must be a cleaner way to do this with Ruby... Y/N??
@@ -22,15 +29,13 @@ class UdaciList
 
     # Check Type
     type = type.downcase
-    if type == "todo"
-      @items.push TodoItem.new(type, description, options)
-    elsif type == "event"
-      @items.push EventItem.new(type, description, options)
-    elsif type == "link"
-      @items.push LinkItem.new(type, description, options)
+    
+    if @types.has_key?(type)
+      @items.push Object.const_get(@types[type]).new(description, options)
     else
       raise UdaciListErrors::InvalidItemType
     end
+
   end
 
   def delete(index)
@@ -60,9 +65,24 @@ class UdaciList
                         "Type" => item.type
                       } 
                   }
-
     Formatador.display_table(data)
+  end
 
+  def register_new_type(file_name, class_name)
+    require "./lib/" + file_name
+    if !@types.has_key?(file_name) && class_exists?(class_name)
+      @types[file_name] = class_name
+    else
+      raise UdaciListErrors::InvalidClassType
+    end  
+  end
+
+  def class_exists?(class_name)
+
+    klass = Object.const_get(class_name)
+    return klass.is_a?(Class)
+    rescue NameError
+      return false
   end
 
 end

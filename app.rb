@@ -5,9 +5,6 @@ require 'date'
 require_relative "lib/listable"
 require_relative "lib/errors"
 require_relative "lib/udacilist"
-require_relative "lib/todo"
-require_relative "lib/event"
-require_relative "lib/link"
 
 list = UdaciList.new(title: "Julia's Stuff")
 list.add("todo", "Buy more cat food", due: "2016-02-03", priority: "low")
@@ -45,3 +42,13 @@ new_list.all
 # DEMO FILTER BY ITEM TYPE
 # ------------------------
 new_list.filter("event")
+
+# DEMO ADD New TYPE
+# ------------------------
+#new_list.register_new_type("phony", "PhonyItem")
+#new_list.register_new_type("todo", "TodoItem")
+#new_list.register_new_type("phony", "TodoItem")
+# Will throw an UdaciListErrors::InvalidClassType error
+new_list.register_new_type("image", "ImageItem")
+new_list.add("image", "This is an image")
+new_list.filter("image")
